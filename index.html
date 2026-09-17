@@ -3,913 +3,840 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#6366f1">
-<meta name="description" content="LearnMate AI — Your Personalized AI Learning Companion">
-<title>LearnMate AI | Personalized Learning</title>
+<meta name="theme-color" content="#070b16">
+<meta name="description" content="LearnMate AI — Personalized Learning Intelligence">
+<title>LearnMate AI</title>
 
 <style>
-/* =========================================================
-   LEARNMATE AI — PREMIUM HACKATHON BUILD
-   Single-file application
-   ========================================================= */
-
 :root{
-  --bg:#f6f7ff;
-  --surface:#ffffff;
-  --surface2:#f8f9ff;
-  --text:#111827;
-  --muted:#667085;
-  --border:#e5e7eb;
-  --primary:#6366f1;
-  --primary2:#8b5cf6;
-  --cyan:#06b6d4;
-  --green:#10b981;
-  --orange:#f59e0b;
-  --red:#ef4444;
-  --shadow:0 20px 60px rgba(31,41,55,.08);
+  --bg:#070b16;
+  --panel:#0d1324;
+  --panel2:#111a2e;
+  --line:rgba(255,255,255,.09);
+  --text:#eef3ff;
+  --muted:#9aa7c2;
+  --primary:#7c8cff;
+  --primary2:#9b7cff;
+  --good:#45d6a4;
+  --warn:#f4c95d;
+  --bad:#ff7185;
+  --cyan:#59c7ff;
   --radius:22px;
+  --shadow:0 24px 80px rgba(0,0,0,.35);
 }
 
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+*{box-sizing:border-box}
 
-html{
-  scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  margin:0;
   background:
-    radial-gradient(circle at 10% 10%,rgba(99,102,241,.10),transparent 30%),
-    radial-gradient(circle at 90% 10%,rgba(139,92,246,.10),transparent 30%),
+    radial-gradient(circle at 15% 0%,rgba(124,140,255,.13),transparent 28rem),
+    radial-gradient(circle at 90% 10%,rgba(155,124,255,.10),transparent 25rem),
     var(--bg);
   color:var(--text);
-  min-height:100vh;
+  font:15px/1.6 Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
-button,input,select,textarea{
-  font:inherit;
-}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
 
-button{
-  cursor:pointer;
-}
-
-.hidden{
-  display:none!important;
-}
-
-/* ================= NAVBAR ================= */
-
-.navbar{
+.topbar{
   position:sticky;
   top:0;
-  z-index:1000;
+  z-index:50;
+  height:72px;
+  border-bottom:1px solid var(--line);
+  background:rgba(7,11,22,.86);
   backdrop-filter:blur(18px);
-  background:rgba(255,255,255,.86);
-  border-bottom:1px solid rgba(229,231,235,.8);
 }
 
-.nav-inner{
-  max-width:1250px;
+.nav{
+  max-width:1280px;
+  height:100%;
   margin:auto;
-  height:72px;
-  padding:0 20px;
+  padding:0 22px;
   display:flex;
   align-items:center;
-  justify-content:space-between;
   gap:20px;
 }
 
 .logo{
   display:flex;
   align-items:center;
-  gap:10px;
-  font-size:21px;
-  font-weight:900;
-  color:#111827;
-  cursor:pointer;
+  gap:11px;
+  font-weight:800;
+  white-space:nowrap;
 }
 
-.logo-icon{
-  width:40px;
-  height:40px;
+.logoMark{
+  width:38px;
+  height:38px;
+  border-radius:13px;
   display:grid;
   place-items:center;
-  border-radius:13px;
-  color:white;
   background:linear-gradient(135deg,var(--primary),var(--primary2));
-  box-shadow:0 10px 25px rgba(99,102,241,.28);
-}
-
-.logo span{
-  background:linear-gradient(135deg,var(--primary),var(--primary2));
-  -webkit-background-clip:text;
-  color:transparent;
+  box-shadow:0 10px 30px rgba(124,140,255,.25);
 }
 
 .navlinks{
   display:flex;
-  align-items:center;
-  gap:5px;
+  gap:4px;
+  margin-left:auto;
 }
 
-.navlinks button{
+.navlinks button,
+.mobileNav button{
   border:0;
   background:transparent;
-  color:#667085;
-  padding:10px 13px;
+  color:var(--muted);
+  padding:9px 12px;
   border-radius:11px;
-  font-weight:700;
-  transition:.2s;
 }
 
 .navlinks button:hover,
-.navlinks button.active{
-  background:#eef0ff;
-  color:var(--primary);
+.navlinks button.active,
+.mobileNav button.active{
+  background:rgba(255,255,255,.06);
+  color:white;
 }
 
-.profile-mini{
+.navRight{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:9px;
+}
+
+.iconBtn,
+.profileBtn{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.04);
+  color:white;
+  border-radius:12px;
+  padding:9px 11px;
+}
+
+.profileBtn{
+  display:flex;
+  align-items:center;
+  gap:8px;
 }
 
 .avatar{
-  width:39px;
-  height:39px;
+  width:28px;
+  height:28px;
+  border-radius:50%;
   display:grid;
   place-items:center;
-  border-radius:50%;
-  color:white;
+  background:linear-gradient(135deg,#6675ff,#a276ff);
+  font-size:12px;
   font-weight:800;
-  background:linear-gradient(135deg,var(--primary),var(--primary2));
 }
 
-.menu-btn{
-  display:none;
-  border:0;
-  background:#f1f2ff;
-  width:42px;
-  height:42px;
-  border-radius:12px;
-}
-
-/* ================= LAYOUT ================= */
+.menuBtn{display:none}
 
 .container{
-  max-width:1250px;
+  max-width:1280px;
   margin:auto;
-  padding:30px 20px 70px;
+  padding:34px 22px 70px;
 }
 
 .page{
-  animation:pageIn .35s ease;
+  display:none;
+  animation:pageIn .3s ease;
 }
+
+.page.active{display:block}
 
 @keyframes pageIn{
-  from{opacity:0;transform:translateY(10px)}
+  from{opacity:0;transform:translateY(5px)}
   to{opacity:1;transform:none}
 }
-
-/* ================= HERO ================= */
 
 .hero{
   min-height:calc(100vh - 72px);
   display:grid;
-  grid-template-columns:1.1fr .9fr;
+  grid-template-columns:1.05fr .95fr;
   align-items:center;
-  gap:50px;
-  max-width:1250px;
-  margin:auto;
-  padding:60px 20px 90px;
+  gap:42px;
+  padding:45px 0;
 }
 
-.badge{
+.eyebrow{
   display:inline-flex;
   align-items:center;
   gap:8px;
-  padding:8px 13px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.035);
+  padding:7px 11px;
   border-radius:999px;
-  background:#eef0ff;
-  color:var(--primary);
-  font-weight:800;
-  font-size:13px;
-  margin-bottom:20px;
+  color:#b9c4dc;
+  font-size:12px;
 }
 
-.hero h1{
-  font-size:clamp(46px,6vw,76px);
-  line-height:.98;
-  letter-spacing:-3px;
-  margin-bottom:25px;
+.dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--good);
+  box-shadow:0 0 15px var(--good);
 }
 
-.gradient-text{
-  background:linear-gradient(135deg,#4f46e5,#7c3aed,#0891b2);
+h1{
+  font-size:clamp(42px,6vw,76px);
+  line-height:1.02;
+  letter-spacing:-3.5px;
+  margin:20px 0 18px;
+}
+
+.gradient{
+  background:linear-gradient(100deg,#fff,#aeb9ff,#bd9cff);
   -webkit-background-clip:text;
+  background-clip:text;
   color:transparent;
 }
 
 .hero p{
-  color:var(--muted);
   font-size:18px;
-  line-height:1.7;
-  max-width:650px;
-  margin-bottom:30px;
+  color:var(--muted);
+  max-width:680px;
 }
 
-.hero-actions{
+.actions{
   display:flex;
-  gap:12px;
+  gap:11px;
   flex-wrap:wrap;
+  margin-top:25px;
 }
 
 .btn{
-  border:0;
+  border:1px solid var(--line);
   border-radius:13px;
-  padding:13px 19px;
-  font-weight:800;
+  padding:11px 16px;
+  background:rgba(255,255,255,.045);
+  color:white;
   transition:.2s;
 }
 
 .btn:hover{
-  transform:translateY(-2px);
+  transform:translateY(-1px);
+  background:rgba(255,255,255,.08);
 }
 
-.btn-primary{
-  color:white;
+.btn.primary{
+  border-color:transparent;
   background:linear-gradient(135deg,var(--primary),var(--primary2));
-  box-shadow:0 14px 30px rgba(99,102,241,.25);
+  box-shadow:0 12px 35px rgba(124,140,255,.22);
 }
 
-.btn-secondary{
-  background:white;
-  border:1px solid var(--border);
-  color:#344054;
+.btn.good{
+  background:rgba(69,214,164,.1);
+  color:#8ef0cc;
 }
 
-.btn-danger{
-  background:#fff1f2;
-  color:#dc2626;
-}
-
-.hero-card{
+.aiOrb{
   position:relative;
   min-height:470px;
-  border-radius:30px;
-  padding:24px;
-  background:linear-gradient(145deg,#10162e,#25205b);
+  border:1px solid var(--line);
+  border-radius:32px;
+  background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));
+  box-shadow:var(--shadow);
   overflow:hidden;
-  box-shadow:0 30px 90px rgba(31,41,55,.25);
-  color:white;
+  padding:26px;
 }
 
-.hero-card:before,
-.hero-card:after{
+.aiOrb:before{
   content:"";
   position:absolute;
+  width:330px;
+  height:330px;
   border-radius:50%;
-  filter:blur(5px);
+  background:radial-gradient(circle,rgba(124,140,255,.24),transparent 67%);
+  left:50%;
+  top:42%;
+  transform:translate(-50%,-50%);
 }
 
-.hero-card:before{
-  width:240px;
-  height:240px;
-  background:rgba(99,102,241,.45);
-  top:-80px;
-  right:-50px;
+.core{
+  position:absolute;
+  left:50%;
+  top:42%;
+  transform:translate(-50%,-50%);
+  width:155px;
+  height:155px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:radial-gradient(circle at 35% 30%,#dfe4ff,#7b87ff 38%,#5c51bd 70%,#19143a);
+  box-shadow:0 0 80px rgba(124,140,255,.45),inset 0 0 40px rgba(255,255,255,.2);
+  animation:float 5s ease-in-out infinite;
 }
 
-.hero-card:after{
-  width:200px;
-  height:200px;
-  background:rgba(6,182,212,.28);
-  bottom:-70px;
-  left:-60px;
+.core:after{
+  content:"";
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  background:white;
+  box-shadow:0 0 35px white;
 }
 
-.mock-dashboard{
-  position:relative;
-  z-index:2;
-  background:rgba(255,255,255,.10);
-  border:1px solid rgba(255,255,255,.16);
-  backdrop-filter:blur(20px);
-  border-radius:22px;
-  padding:20px;
-  margin-top:30px;
+@keyframes float{
+  50%{transform:translate(-50%,-46%)}
 }
 
-.mock-top{
+.signal{
+  position:absolute;
+  border:1px solid rgba(160,170,255,.22);
+  border-radius:50%;
+  left:50%;
+  top:42%;
+  transform:translate(-50%,-50%);
+  animation:pulse 3.4s ease-out infinite;
+}
+
+.s1{width:220px;height:220px}
+.s2{width:330px;height:330px;animation-delay:1s}
+.s3{width:450px;height:450px;animation-delay:2s}
+
+@keyframes pulse{
+  0%{opacity:.05;transform:translate(-50%,-50%) scale(.9)}
+  55%{opacity:.8}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1.08)}
+}
+
+.orbLabel{
+  position:absolute;
+  left:26px;
+  right:26px;
+  bottom:25px;
+  border:1px solid var(--line);
+  background:rgba(7,11,22,.65);
+  border-radius:16px;
+  padding:14px;
+  backdrop-filter:blur(10px);
+}
+
+.orbLabel strong{display:block}
+.orbLabel span{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.sectionTitle{
   display:flex;
   justify-content:space-between;
-  margin-bottom:25px;
+  align-items:flex-end;
+  gap:18px;
+  margin-bottom:20px;
 }
 
-.mock-score{
-  font-size:43px;
-  font-weight:900;
+.sectionTitle h2{
+  margin:0;
+  font-size:29px;
+  letter-spacing:-1px;
 }
 
-.mock-bars{
+.sectionTitle p{
+  margin:5px 0 0;
+  color:var(--muted);
+}
+
+.grid{
   display:grid;
   gap:15px;
 }
 
-.mock-bar{
-  display:grid;
-  grid-template-columns:95px 1fr 40px;
-  gap:10px;
-  align-items:center;
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+
+.card{
+  border:1px solid var(--line);
+  background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.018));
+  border-radius:var(--radius);
+  padding:20px;
+  box-shadow:0 12px 45px rgba(0,0,0,.12);
+}
+
+.card h3{margin:0 0 5px}
+
+.muted{color:var(--muted)}
+.small{font-size:12px}
+
+.kpi{
+  font-size:34px;
+  font-weight:800;
+  letter-spacing:-1px;
+}
+
+.kpiLabel{
+  color:var(--muted);
   font-size:12px;
 }
 
 .bar{
-  height:9px;
-  background:rgba(255,255,255,.15);
-  border-radius:999px;
+  height:8px;
+  background:#1b2438;
+  border-radius:99px;
   overflow:hidden;
+  margin-top:10px;
 }
 
-.bar span{
+.bar i{
   display:block;
   height:100%;
-  background:linear-gradient(90deg,#818cf8,#22d3ee);
-  border-radius:999px;
-}
-
-/* ================= SECTION ================= */
-
-.section{
-  padding:70px 0;
-}
-
-.section-title{
-  text-align:center;
-  margin-bottom:40px;
-}
-
-.section-title h2{
-  font-size:38px;
-  letter-spacing:-1.5px;
-  margin-bottom:10px;
-}
-
-.section-title p{
-  color:var(--muted);
-}
-
-.features{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
-}
-
-.feature{
-  padding:26px;
-  background:rgba(255,255,255,.78);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  transition:.25s;
-}
-
-.feature:hover{
-  transform:translateY(-5px);
-}
-
-.feature-icon{
-  width:50px;
-  height:50px;
-  border-radius:15px;
-  display:grid;
-  place-items:center;
-  background:#eef0ff;
-  color:var(--primary);
-  font-size:23px;
-  margin-bottom:18px;
-}
-
-.feature h3{
-  margin-bottom:8px;
-}
-
-.feature p{
-  color:var(--muted);
-  line-height:1.6;
-}
-
-/* ================= CARDS ================= */
-
-.card{
-  background:rgba(255,255,255,.9);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  padding:24px;
-}
-
-.page-heading{
-  margin-bottom:25px;
-}
-
-.page-heading h1{
-  font-size:34px;
-  letter-spacing:-1px;
-}
-
-.page-heading p{
-  color:var(--muted);
-  margin-top:7px;
-}
-
-/* ================= DASHBOARD ================= */
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
-  margin-bottom:20px;
-}
-
-.stat{
-  padding:22px;
-  background:white;
-  border:1px solid var(--border);
-  border-radius:18px;
-  box-shadow:var(--shadow);
-}
-
-.stat-label{
-  color:var(--muted);
-  font-size:13px;
-  font-weight:700;
-  margin-bottom:9px;
-}
-
-.stat-value{
-  font-size:31px;
-  font-weight:900;
-}
-
-.dashboard-grid{
-  display:grid;
-  grid-template-columns:1.4fr .8fr;
-  gap:18px;
-}
-
-.chart-row{
-  display:grid;
-  grid-template-columns:120px 1fr 45px;
-  gap:12px;
-  align-items:center;
-  margin:17px 0;
-}
-
-.progress{
-  height:11px;
-  background:#edf0f7;
-  border-radius:999px;
-  overflow:hidden;
-}
-
-.progress span{
-  display:block;
-  height:100%;
-  border-radius:999px;
+  border-radius:99px;
   background:linear-gradient(90deg,var(--primary),var(--primary2));
-  transition:width .7s ease;
 }
 
-.priority{
-  font-size:11px;
-  padding:5px 8px;
+.chip{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:5px 9px;
   border-radius:999px;
-  font-weight:800;
+  background:rgba(255,255,255,.055);
+  border:1px solid var(--line);
+  font-size:11px;
+  color:#c4cce0;
 }
 
-.priority.high{
-  background:#fee2e2;
-  color:#b91c1c;
+.chip.good{
+  color:#8ef0cc;
+  background:rgba(69,214,164,.08);
 }
 
-.priority.medium{
-  background:#fef3c7;
-  color:#92400e;
+.chip.warn{
+  color:#ffe29a;
+  background:rgba(244,201,93,.08);
 }
 
-.priority.low{
-  background:#dcfce7;
-  color:#166534;
+.chip.bad{
+  color:#ffabb7;
+  background:rgba(255,113,133,.08);
 }
 
-/* ================= FORMS ================= */
+.row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
 
-.form-grid{
+.stack{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.formGrid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:18px;
-}
-
-.field{
-  display:grid;
-  gap:7px;
-}
-
-.field.full{
-  grid-column:1/-1;
+  gap:14px;
 }
 
 .field label{
-  font-size:13px;
-  font-weight:800;
-  color:#344054;
+  display:block;
+  color:#c7d0e4;
+  font-size:12px;
+  margin-bottom:6px;
 }
 
 .field input,
 .field select,
 .field textarea{
   width:100%;
-  border:1px solid var(--border);
-  border-radius:13px;
-  padding:13px 14px;
+  border:1px solid var(--line);
+  background:#0a1020;
+  color:white;
+  border-radius:12px;
+  padding:11px 12px;
   outline:none;
-  background:white;
-  color:var(--text);
-  transition:.2s;
 }
 
 .field input:focus,
 .field select:focus,
 .field textarea:focus{
-  border-color:var(--primary);
-  box-shadow:0 0 0 4px rgba(99,102,241,.10);
+  border-color:rgba(124,140,255,.7);
+  box-shadow:0 0 0 3px rgba(124,140,255,.1);
 }
 
-/* ================= ASSESSMENT ================= */
+.field textarea{
+  min-height:105px;
+  resize:vertical;
+}
 
-.assessment-header{
+.checks{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.check{
+  position:relative;
+}
+
+.check input{
+  position:absolute;
+  opacity:0;
+}
+
+.check label{
+  display:block;
+  padding:8px 11px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:rgba(255,255,255,.025);
+  color:var(--muted);
+  cursor:pointer;
+}
+
+.check input:checked+label{
+  color:white;
+  background:rgba(124,140,255,.14);
+  border-color:rgba(124,140,255,.55);
+}
+
+.metric{
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:20px;
-  margin-bottom:20px;
+  gap:14px;
 }
 
-.question-number{
-  color:var(--primary);
-  font-weight:900;
+.ring{
+  width:74px;
+  height:74px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:conic-gradient(var(--primary) var(--pct),#1b2438 0);
+}
+
+.ring:after{
+  content:"";
+  width:58px;
+  height:58px;
+  background:var(--panel);
+  border-radius:50%;
+  grid-area:1/1;
+}
+
+.ring b{
+  grid-area:1/1;
+  z-index:1;
+}
+
+.topicRow{
+  display:grid;
+  grid-template-columns:130px 1fr 42px;
+  align-items:center;
+  gap:10px;
+  margin:12px 0;
+}
+
+.topicRow .bar{margin:0}
+
+.assessLayout{
+  display:grid;
+  grid-template-columns:250px 1fr;
+  gap:18px;
+}
+
+.qnav{
+  position:sticky;
+  top:95px;
+  height:max-content;
+}
+
+.qbtn{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  border:1px solid var(--line);
+  background:transparent;
+  color:var(--muted);
+  padding:9px 11px;
+  border-radius:10px;
+  margin-bottom:7px;
+}
+
+.qbtn.current{
+  background:rgba(124,140,255,.13);
+  color:white;
+  border-color:rgba(124,140,255,.5);
+}
+
+.qbtn.done{color:#8ef0cc}
+
+.questionNum{
+  color:#9daaff;
+  font-size:12px;
+  font-weight:700;
 }
 
 .question{
-  font-size:24px;
-  font-weight:850;
-  line-height:1.35;
-  margin:25px 0;
-}
-
-.options{
-  display:grid;
-  gap:12px;
+  font-size:25px;
+  line-height:1.25;
+  margin:7px 0 20px;
 }
 
 .option{
-  padding:16px;
-  border:1px solid var(--border);
-  background:white;
-  border-radius:15px;
-  text-align:left;
+  display:block;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.025);
+  border-radius:14px;
+  padding:14px;
+  margin:9px 0;
+  cursor:pointer;
   transition:.2s;
 }
 
 .option:hover{
-  border-color:#a5b4fc;
-  background:#f8f8ff;
+  background:rgba(255,255,255,.055);
 }
 
 .option.selected{
-  border-color:var(--primary);
-  background:#eef0ff;
-  color:#3730a3;
-  font-weight:800;
+  border-color:rgba(124,140,255,.65);
+  background:rgba(124,140,255,.12);
 }
 
-.assessment-actions{
-  display:flex;
-  justify-content:space-between;
-  margin-top:25px;
+.option input{display:none}
+
+.timeline{
+  position:relative;
+  margin-top:12px;
 }
 
-/* ================= ROADMAP ================= */
-
-.roadmap{
+.step{
   display:grid;
-  gap:14px;
+  grid-template-columns:32px 1fr;
+  gap:13px;
+  position:relative;
+  padding-bottom:18px;
 }
 
-.roadmap-item{
-  display:grid;
-  grid-template-columns:55px 1fr auto;
-  gap:15px;
-  align-items:center;
-  padding:19px;
-  background:white;
-  border:1px solid var(--border);
-  border-radius:18px;
-  transition:.2s;
+.step:not(:last-child):before{
+  content:"";
+  position:absolute;
+  left:15px;
+  top:31px;
+  bottom:0;
+  width:1px;
+  background:var(--line);
 }
 
-.roadmap-item:hover{
-  transform:translateX(3px);
-}
-
-.roadmap-num{
-  width:45px;
-  height:45px;
+.stepDot{
+  width:31px;
+  height:31px;
+  border-radius:50%;
   display:grid;
   place-items:center;
-  border-radius:14px;
-  background:#eef0ff;
-  color:var(--primary);
-  font-weight:900;
+  border:1px solid var(--line);
+  background:#11192c;
+  z-index:1;
+  font-size:12px;
 }
 
-.roadmap-item.completed{
-  opacity:.7;
+.step.complete .stepDot{
+  background:rgba(69,214,164,.15);
+  border-color:rgba(69,214,164,.5);
+  color:#8ef0cc;
 }
 
-.roadmap-item.completed .roadmap-num{
-  background:#dcfce7;
-  color:#15803d;
-}
+.stepTitle{font-weight:700}
 
-.roadmap-info h3{
-  margin-bottom:4px;
-}
-
-.roadmap-info p{
+.stepMeta{
   color:var(--muted);
-  font-size:13px;
-}
-
-.roadmap-meta{
-  text-align:right;
-}
-
-.roadmap-meta small{
-  display:block;
-  color:var(--muted);
-  margin-bottom:8px;
-}
-
-/* ================= RESOURCES ================= */
-
-.resource-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:17px;
+  font-size:12px;
 }
 
 .resource{
-  padding:21px;
-  background:white;
-  border:1px solid var(--border);
-  border-radius:19px;
-  box-shadow:var(--shadow);
-}
-
-.resource-type{
-  display:inline-block;
-  background:#eef0ff;
-  color:var(--primary);
-  font-size:11px;
-  font-weight:900;
-  padding:5px 8px;
-  border-radius:999px;
-  margin-bottom:13px;
-}
-
-.resource h3{
-  margin-bottom:7px;
-}
-
-.resource p{
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.55;
-  margin-bottom:15px;
-}
-
-/* ================= AI CHAT ================= */
-
-.chat{
-  max-width:900px;
-  margin:auto;
-}
-
-.chat-box{
-  height:520px;
-  overflow-y:auto;
-  padding:20px;
-  background:#f8f9ff;
-  border-radius:18px;
-  border:1px solid var(--border);
   display:flex;
   flex-direction:column;
-  gap:14px;
+  gap:11px;
 }
 
-.message{
-  max-width:78%;
-  padding:13px 16px;
-  border-radius:17px;
-  line-height:1.55;
-  font-size:14px;
-}
-
-.message.ai{
-  align-self:flex-start;
-  background:white;
-  border:1px solid var(--border);
-}
-
-.message.user{
-  align-self:flex-end;
-  background:linear-gradient(135deg,var(--primary),var(--primary2));
-  color:white;
-}
-
-.chat-input{
-  display:flex;
-  gap:10px;
-  margin-top:13px;
-}
-
-.chat-input input{
-  flex:1;
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:14px;
-  outline:none;
-}
-
-/* ================= MODAL ================= */
-
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:2000;
-  background:rgba(15,23,42,.55);
-  backdrop-filter:blur(8px);
-  display:grid;
-  place-items:center;
-  padding:20px;
-}
-
-.modal-card{
-  width:min(600px,100%);
-  max-height:90vh;
-  overflow:auto;
-  background:white;
-  border-radius:25px;
-  padding:27px;
-  box-shadow:0 40px 100px rgba(0,0,0,.2);
-}
-
-.modal-header{
+.resourceTop{
   display:flex;
   justify-content:space-between;
-  gap:20px;
-  margin-bottom:20px;
+  gap:10px;
 }
 
-.close{
-  border:0;
-  background:#f2f4f7;
+.resourceIcon{
   width:38px;
   height:38px;
-  border-radius:10px;
+  border-radius:11px;
+  display:grid;
+  place-items:center;
+  background:rgba(124,140,255,.1);
 }
 
-/* ================= TOAST ================= */
+.chat{
+  height:540px;
+  display:grid;
+  grid-template-rows:1fr auto;
+  border:1px solid var(--line);
+  border-radius:24px;
+  overflow:hidden;
+  background:#090f1e;
+}
+
+.messages{
+  padding:22px;
+  overflow:auto;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.msg{
+  max-width:78%;
+  padding:12px 14px;
+  border-radius:15px;
+  border:1px solid var(--line);
+  white-space:pre-wrap;
+}
+
+.msg.ai{
+  align-self:flex-start;
+  background:#11192b;
+}
+
+.msg.user{
+  align-self:flex-end;
+  background:rgba(124,140,255,.13);
+  border-color:rgba(124,140,255,.25);
+}
+
+.msg small{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-bottom:3px;
+}
+
+.chatForm{
+  display:flex;
+  gap:8px;
+  padding:12px;
+  border-top:1px solid var(--line);
+}
+
+.chatForm input{
+  flex:1;
+  border:1px solid var(--line);
+  background:#0d1426;
+  color:white;
+  border-radius:12px;
+  padding:12px;
+  outline:0;
+}
+
+.analysis{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:15px;
+}
+
+.insight{
+  border-left:3px solid var(--primary);
+  padding-left:13px;
+}
+
+.insight strong{display:block}
+
+.insight p{
+  margin:3px 0;
+  color:var(--muted);
+}
 
 .toast{
   position:fixed;
   right:20px;
   bottom:20px;
-  z-index:3000;
-  background:#111827;
+  z-index:100;
+  padding:12px 15px;
+  border:1px solid var(--line);
+  background:#11192b;
   color:white;
-  padding:13px 17px;
   border-radius:13px;
-  box-shadow:0 15px 40px rgba(0,0,0,.2);
-  transform:translateY(120px);
+  box-shadow:var(--shadow);
   opacity:0;
-  transition:.3s;
+  transform:translateY(12px);
+  pointer-events:none;
+  transition:.25s;
 }
 
 .toast.show{
-  transform:none;
   opacity:1;
+  transform:none;
 }
 
-/* ================= FOOTER ================= */
-
-footer{
-  max-width:1250px;
-  margin:auto;
-  padding:30px 20px 45px;
-  text-align:center;
+.footer{
+  border-top:1px solid var(--line);
+  padding:22px 0;
   color:var(--muted);
-  font-size:13px;
+  font-size:12px;
 }
 
-/* ================= RESPONSIVE ================= */
+.mobileNav{display:none}
 
 @media(max-width:950px){
-  .hero{
-    grid-template-columns:1fr;
-  }
+  .hero{grid-template-columns:1fr}
+  .g4{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:1fr 1fr}
+  .analysis{grid-template-columns:1fr}
+}
 
-  .dashboard-grid{
-    grid-template-columns:1fr;
-  }
+@media(max-width:720px){
+  .navlinks{display:none}
+  .menuBtn{display:block}
 
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .features,
-  .resource-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .navlinks{
-    display:none;
+  .mobileNav{
     position:absolute;
     top:72px;
     left:0;
     right:0;
-    background:white;
-    border-bottom:1px solid var(--border);
-    padding:10px;
-    flex-direction:column;
-    align-items:stretch;
+    background:#090e1b;
+    border-bottom:1px solid var(--line);
+    padding:10px 18px;
   }
 
-  .navlinks.mobile-open{
-    display:flex;
-  }
+  .mobileNav.open{display:block}
 
-  .navlinks button{
+  .mobileNav button{
+    width:100%;
     text-align:left;
   }
 
-  .menu-btn{
-    display:block;
-  }
-}
+  .hero{padding:30px 0}
 
-@media(max-width:650px){
-  .hero{
-    padding-top:35px;
-  }
-
-  .hero h1{
-    font-size:45px;
+  h1{
     letter-spacing:-2px;
   }
 
-  .hero-card{
-    min-height:400px;
-  }
+  .aiOrb{min-height:350px}
 
-  .stats,
-  .features,
-  .resource-grid,
-  .form-grid{
+  .g2,.g3,.g4,.formGrid,.assessLayout{
     grid-template-columns:1fr;
   }
 
-  .field.full{
-    grid-column:auto;
+  .qnav{position:static}
+
+  .topicRow{
+    grid-template-columns:100px 1fr 38px;
   }
 
-  .roadmap-item{
-    grid-template-columns:45px 1fr;
+  .container{
+    padding-left:15px;
+    padding-right:15px;
   }
 
-  .roadmap-meta{
-    grid-column:2;
-    text-align:left;
-  }
-
-  .message{
-    max-width:90%;
+  .profileBtn span:not(.avatar){
+    display:none;
   }
 }
 </style>
@@ -917,222 +844,363 @@ footer{
 
 <body>
 
-<!-- =========================================================
-     NAVIGATION
-========================================================= -->
+<header class="topbar">
+<nav class="nav">
 
-<nav class="navbar">
-  <div class="nav-inner">
+<a href="#" class="logo" data-page="home">
+  <span class="logoMark">✦</span>
+  <span>LearnMate <span class="muted">AI</span></span>
+</a>
 
-    <div class="logo" onclick="goHome()">
-      <div class="logo-icon">✦</div>
-      Learn<span>Mate</span> AI
-    </div>
+<div class="navlinks">
 
-    <div class="navlinks" id="navlinks">
-      <button data-page="dashboard" onclick="showPage('dashboard')">Dashboard</button>
-      <button data-page="assessment" onclick="showPage('assessment')">Assessment</button>
-      <button data-page="roadmap" onclick="showPage('roadmap')">Learning Path</button>
-      <button data-page="resources" onclick="showPage('resources')">Resources</button>
-      <button data-page="assistant" onclick="showPage('assistant')">AI Assistant</button>
-      <button data-page="profile" onclick="showPage('profile')">Profile</button>
-    </div>
+<button data-page="dashboard">Dashboard</button>
+<button data-page="assessment">Assessment</button>
+<button data-page="path">Learning Path</button>
+<button data-page="resources">Resources</button>
+<button data-page="assistant">AI Assistant</button>
+<button data-page="profile">Profile</button>
 
-    <div class="profile-mini">
-      <div class="avatar" id="navAvatar">?</div>
-      <button class="menu-btn" onclick="toggleMenu()">☰</button>
-    </div>
+</div>
 
-  </div>
+<div class="navRight">
+
+<button class="iconBtn menuBtn" id="menuBtn">☰</button>
+
+<button class="profileBtn" data-page="profile">
+<span class="avatar" id="avatar">AK</span>
+<span id="navName">Learner</span>
+</button>
+
+</div>
+
 </nav>
 
-
-<!-- =========================================================
-     LANDING PAGE
-========================================================= -->
-
-<main id="app">
-
-<section id="home" class="page">
-
-  <div class="hero">
-
-    <div>
-
-      <div class="badge">
-        ✨ AI-Powered Personalized Learning
-      </div>
-
-      <h1>
-        Learn smarter.<br>
-        <span class="gradient-text">Learn your way.</span>
-      </h1>
-
-      <p>
-        LearnMate AI understands your strengths, identifies your
-        learning gaps, and creates a personalized path to help you
-        learn faster and more effectively.
-      </p>
-
-      <div class="hero-actions">
-        <button class="btn btn-primary" onclick="startLearning()">
-          Start My Learning Journey →
-        </button>
-
-        <button class="btn btn-secondary" onclick="loadDemo()">
-          ▶ Explore Demo
-        </button>
-      </div>
-
-    </div>
-
-    <div class="hero-card">
-
-      <div>
-        <div style="font-size:13px;opacity:.7">
-          PERSONALIZED LEARNING INTELLIGENCE
-        </div>
-
-        <h2 style="font-size:28px;margin-top:8px">
-          Your progress, understood.
-        </h2>
-      </div>
-
-      <div class="mock-dashboard">
-
-        <div class="mock-top">
-          <div>
-            <div style="opacity:.65;font-size:12px">
-              Overall Skill
-            </div>
-            <div class="mock-score">68%</div>
-          </div>
-
-          <div style="text-align:right">
-            <div style="font-size:12px;opacity:.65">
-              Current Focus
-            </div>
-            <strong>Functions</strong>
-          </div>
-        </div>
-
-        <div class="mock-bars">
-
-          <div class="mock-bar">
-            <span>Basics</span>
-            <div class="bar"><span style="width:80%"></span></div>
-            <b>80</b>
-          </div>
-
-          <div class="mock-bar">
-            <span>Variables</span>
-            <div class="bar"><span style="width:90%"></span></div>
-            <b>90</b>
-          </div>
-
-          <div class="mock-bar">
-            <span>Conditions</span>
-            <div class="bar"><span style="width:70%"></span></div>
-            <b>70</b>
-          </div>
-
-          <div class="mock-bar">
-            <span>Loops</span>
-            <div class="bar"><span style="width:45%"></span></div>
-            <b>45</b>
-          </div>
-
-          <div class="mock-bar">
-            <span>Functions</span>
-            <div class="bar"><span style="width:25%"></span></div>
-            <b>25</b>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
+<div class="mobileNav" id="mobileNav">
+<button data-page="dashboard">Dashboard</button>
+<button data-page="assessment">Assessment</button>
+<button data-page="path">Learning Path</button>
+<button data-page="resources">Resources</button>
+<button data-page="assistant">AI Assistant</button>
+<button data-page="profile">Profile</button>
+</div>
+</header>
 
 
-  <div class="container">
+<main class="container">
 
-    <section class="section">
+<!-- HOME -->
 
-      <div class="section-title">
-        <h2>Everything you need to learn better</h2>
-        <p>One intelligent learning companion from assessment to mastery.</p>
-      </div>
+<section class="page active" id="page-home">
 
-      <div class="features">
+<div class="hero">
 
-        <div class="feature">
-          <div class="feature-icon">🧠</div>
-          <h3>AI Skill Analysis</h3>
-          <p>
-            Understand exactly where you are strong, where you struggle,
-            and what deserves your attention next.
-          </p>
-        </div>
+<div>
 
-        <div class="feature">
-          <div class="feature-icon">🎯</div>
-          <h3>Adaptive Roadmap</h3>
-          <p>
-            Your learning path changes according to your performance,
-            priorities and learning goals.
-          </p>
-        </div>
+<span class="eyebrow">
+<i class="dot"></i>
+Adaptive Learning Intelligence
+</span>
 
-        <div class="feature">
-          <div class="feature-icon">📈</div>
-          <h3>Progress Intelligence</h3>
-          <p>
-            Track improvement across individual topics instead of relying
-            only on one overall score.
-          </p>
-        </div>
+<h1>
+Learn smarter.<br>
+<span class="gradient">Learn your way.</span>
+</h1>
 
-        <div class="feature">
-          <div class="feature-icon">🤖</div>
-          <h3>AI Learning Assistant</h3>
-          <p>
-            Ask questions about your learning path and receive
-            context-aware guidance.
-          </p>
-        </div>
+<p>
+LearnMate AI transforms assessment signals, strengths,
+weaknesses, goals and progress into a personalized,
+explainable learning system.
+</p>
 
-        <div class="feature">
-          <div class="feature-icon">⚡</div>
-          <h3>Smart Recommendations</h3>
-          <p>
-            Get recommendations based on your weakest areas and current
-            learning level.
-          </p>
-        </div>
+<div class="actions">
 
-        <div class="feature">
-          <div class="feature-icon">🔄</div>
-          <h3>Continuous Improvement</h3>
-          <p>
-            Complete topics, update your progress and continuously refine
-            your personalized journey.
-          </p>
-        </div>
+<button class="btn primary" data-page="profile">
+Start My Learning Journey →
+</button>
 
-      </div>
+<button class="btn" id="demoBtn">
+Explore Demo
+</button>
 
-    </section>
+</div>
 
-  </div>
+<div class="actions">
+
+<span class="chip">✓ Deep skill-gap analysis</span>
+<span class="chip">✓ Adaptive roadmap</span>
+<span class="chip">✓ AI learning coach</span>
+
+</div>
+
+</div>
+
+
+<div class="aiOrb">
+
+<div class="signal s1"></div>
+<div class="signal s2"></div>
+<div class="signal s3"></div>
+
+<div class="core"></div>
+
+<div class="orbLabel">
+<strong>Learning Intelligence Engine</strong>
+<span>
+Analyzing skills · goals · difficulty · progress
+</span>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="sectionTitle">
+<div>
+<h2>One system. Your learning logic.</h2>
+<p>Designed for focused study rather than noisy dashboards.</p>
+</div>
+</div>
+
+
+<div class="grid g3">
+
+<div class="card">
+<div class="resourceIcon">◈</div>
+<h3>Diagnose</h3>
+<p class="muted">
+Map topic-level understanding instead of relying only
+on one overall score.
+</p>
+</div>
+
+<div class="card">
+<div class="resourceIcon">↗</div>
+<h3>Adapt</h3>
+<p class="muted">
+Adjust difficulty and priorities from the learner's
+weakest signals.
+</p>
+</div>
+
+<div class="card">
+<div class="resourceIcon">✦</div>
+<h3>Explain</h3>
+<p class="muted">
+Every recommendation includes a reason,
+objective and next action.
+</p>
+</div>
+
+</div>
 
 </section>
 
 
-<!-- =========================================================
-     PROFILE PAGE
-========================================================= -->
+<!-- PROFILE -->
 
-<section id="profi
+<section class="page" id="page-profile">
+
+<div class="sectionTitle">
+
+<div>
+<h2>Learner Profile</h2>
+<p>
+Give the intelligence engine enough context
+to personalize your journey.
+</p>
+</div>
+
+<span class="chip good">Profile Intelligence</span>
+
+</div>
+
+
+<div class="card">
+
+<form id="profileForm">
+
+<div class="formGrid">
+
+<div class="field">
+<label>Full Name</label>
+<input id="pName" required placeholder="Your name">
+</div>
+
+<div class="field">
+<label>Branch</label>
+<input id="pBranch" placeholder="CSE / CSE-AIML">
+</div>
+
+<div class="field">
+<label>Year</label>
+
+<select id="pYear">
+<option>1st Year</option>
+<option>2nd Year</option>
+<option>3rd Year</option>
+<option>4th Year</option>
+</select>
+
+</div>
+
+<div class="field">
+<label>Current Skill Level</label>
+
+<select id="pLevel">
+<option>Beginner</option>
+<option>Intermediate</option>
+<option>Advanced</option>
+</select>
+
+</div>
+
+</div>
+
+
+<div class="field" style="margin-top:14px">
+
+<label>Interests</label>
+
+<div class="checks">
+
+<span class="check">
+<input type="checkbox" id="iPython" value="Python">
+<label for="iPython">Python</label>
+</span>
+
+<span class="check">
+<input type="checkbox" id="iAI" value="AI / ML">
+<label for="iAI">AI / ML</label>
+</span>
+
+<span class="check">
+<input type="checkbox" id="iWeb" value="Web Development">
+<label for="iWeb">Web Development</label>
+</span>
+
+<span class="check">
+<input type="checkbox" id="iDS" value="Data Science">
+<label for="iDS">Data Science</label>
+</span>
+
+<span class="check">
+<input type="checkbox" id="iProblem" value="Problem Solving">
+<label for="iProblem">Problem Solving</label>
+</span>
+
+</div>
+</div>
+
+
+<div class="field" style="margin-top:14px">
+
+<label>Learning Goal</label>
+
+<textarea
+id="pGoal"
+placeholder="Example: Build AI apps and become confident in Python problem solving."
+></textarea>
+
+</div>
+
+
+<div class="actions">
+
+<button class="btn primary" type="submit">
+Save Profile & Build Intelligence →
+</button>
+
+<button class="btn" type="button" id="loadDemo">
+Load Alex Demo
+</button>
+
+<button class="btn" type="button" id="resetAll">
+Reset Local Data
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</section>
+
+
+<!-- DASHBOARD -->
+
+<section class="page" id="page-dashboard">
+
+<div class="sectionTitle">
+
+<div>
+<h2 id="dashGreeting">Your Learning Cockpit</h2>
+<p id="dashSub">
+A live view of your current learning state.
+</p>
+</div>
+
+<button class="btn" data-page="assessment">
+Retake Assessment
+</button>
+
+</div>
+
+
+<div class="grid g4">
+
+<div class="card">
+<div class="kpi" id="kScore">—</div>
+<div class="kpiLabel">Assessment Score</div>
+</div>
+
+<div class="card">
+<div class="kpi" id="kGap">—</div>
+<div class="kpiLabel">Primary Skill Gap</div>
+</div>
+
+<div class="card">
+<div class="kpi" id="kStrong">—</div>
+<div class="kpiLabel">Strongest Topic</div>
+</div>
+
+<div class="card">
+<div class="kpi" id="kProgress">0%</div>
+<div class="kpiLabel">Roadmap Completed</div>
+</div>
+
+</div>
+
+
+<div class="analysis" style="margin-top:15px">
+
+<div class="card">
+
+<h3>Topic Performance</h3>
+
+<p class="muted small">
+The engine uses topic-level evidence to decide
+what deserves attention next.
+</p>
+
+<div id="topicBars"></div>
+
+</div>
+
+
+<div class="card">
+
+<h3>Why This Recommendation?</h3>
+
+<div id="whyBox"></div>
+
+<div class="actions">
+
+<button class="btn primary" data-page="path">
+Open Adaptive Path
+</button>
+
+<button class="btn" data-page="assistant">
+Ask AI Coac
